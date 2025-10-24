@@ -1,4 +1,4 @@
-# WS2812 / SK6812 Driver for RP2040 (Pico SDK + PIO)
+# WS2812 / SK6812 Driver for Raspberry Pi Pico series (Pico SDK + PIO)
 
 A compact C++ driver for WS2812(B) (RGB) and SK6812 (RGBW) LEDs on the RP2040 and RP2350 using PIO.  
 Clean API (setPixel, setAll, show), optional DMA, brightness, and gamma correction.

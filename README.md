@@ -28,9 +28,48 @@ Clean API (setPixel, setAll, show), optional DMA, brightness, and gamma correcti
 
 ## Build / Integration
 
-Add the driver files (ws2812.cpp, ws2812.hpp, ws2812.pio) to your project and use:
+### Method 1: Using CMake FetchContent (Recommended)
 
-``` Cmake
+In your project's `CMakeLists.txt`:
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+    pico_ws2812
+    GIT_REPOSITORY https://github.com/SnakebiteEF2000/pico_ws2812.git
+    GIT_TAG main  # or specify a version tag
+)
+FetchContent_MakeAvailable(pico_ws2812)
+
+add_executable(my_app main.cpp)
+target_link_libraries(my_app
+    pico_stdlib
+    ws2812
+)
+pico_add_extra_outputs(my_app)
+```
+
+### Method 2: As a Subdirectory
+
+If you have the library locally:
+
+```cmake
+add_subdirectory(path/to/pico_ws2812)
+
+add_executable(my_app main.cpp)
+target_link_libraries(my_app
+    pico_stdlib
+    ws2812
+)
+pico_add_extra_outputs(my_app)
+```
+
+### Method 3: Manual Integration
+
+Alternatively, you can manually add the driver files (ws2812.cpp, ws2812.hpp, ws2812.pio) to your project:
+
+```cmake
 add_library(ws2812
     ws2812.cpp
 )
@@ -48,9 +87,6 @@ add_executable(my_app main.cpp)
 target_link_libraries(my_app
     pico_stdlib
     ws2812
-    hardware_pio
-    hardware_dma
-    hardware_clocks
 )
 pico_add_extra_outputs(my_app)
 ```
